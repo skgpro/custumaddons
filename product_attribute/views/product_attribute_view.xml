@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+
+
+		<record model="ir.ui.view" id="view_product_category_inherit">
+			<field name="name">view.product.category.inherit</field>
+			<field name="model">product.category</field>
+			<field name="inherit_id" ref="product.product_category_form_view" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='parent_id']" position="after">
+					<field name= "attributes_ids" widget="many2many_tags"/>
+
+				</xpath>
+			</field>
+		</record>
+
+		<record id="products_custom_attribute_view_form" model="ir.ui.view">
+			<field name="name">products.custom.attribute.form</field>
+			<field name="model">product.custom.attribute</field>
+			<field name="arch" type="xml">
+				<form string="Product Attribute">
+					<sheet>
+						<group col="4" colspam="4">
+							<field name="name" required="1" />
+							<field name="value_type" required="1" />
+						</group>
+						<div style="width:700px;">
+							<field name="values_ids" attrs="{'invisible': [('value_type','not in',('selection','multiple_select'))]}">
+								<tree string="Value" editable="bottom">
+									<field name="name" required="1" />
+								</tree>
+							</field>
+						</div>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="products_custom_attribute_tree_view" model="ir.ui.view">
+			<field name="name">products.custom.attribute.tree</field>
+			<field name="model">product.custom.attribute</field>
+			<field name="arch" type="xml">
+				<tree string="Product Attribute">
+					<field name="name" />
+					<field name="value_type" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="products_custom_attribute_line_view_form" model="ir.ui.view">
+			<field name="name">products.custom.line.attribute.form</field>
+			<field name="model">values.line</field>
+			<field name="arch" type="xml">
+				<form string="Product Attribute Line">
+					<sheet>
+						<group col="4" colspam="4">
+							<field name="name" required="1" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="action_products_custom_attribute" model="ir.actions.act_window">
+			<field name="name">Product Attribute</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">product.custom.attribute</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem name="Product Attribute" id="menu_products_custom_attribute" parent="sales_team.menu_sale_config"
+			sequence="5" action="action_products_custom_attribute" />
+
+
+
+		<record model="ir.ui.view" id="view_product_template_inherit">
+			<field name="name">view.product.template.inherit</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product.product_template_only_form_view" />
+			<field name="arch" type="xml">
+				<xpath expr="//form/sheet/notebook/page[2]" position="after">
+					<page name="product_custom_attributes" string="Attributes">
+						
+							<!-- <tree string="Attributes" editable="bottom" > -->
+							
+								<group>
+					            <group>
+								<field name="product_custom_attribute_ids" widget="One2many_list">
+								<tree string="Attributes" editable="bottom">
+								<field name="attribute_id"	/>
+								<field name="selection_id" widget="selection" attrs="{'readonly' : ['|',('value_type','not in',('selection'))]}"/>
+								
+								<!-- <field name="char_val"/> -->
+								<field name="value_type" invisible='1'/>
+								<!-- <field name="integer_val" attrs="{'invisible' : [('value_type','not in',('integer'))]}"/> -->
+
+
+								<!-- <field name="integer_val"/> -->
+							    <!-- </tree> -->
+
+
+							
+								<!-- <field name="char_val" attrs="{'readonly' : ['|',('value_type','not in',('char'))]}"/> -->
+								<!-- <field name="integer_val" attrs="{'readonly' : ['|',('value_type','not in',('integer'))]}"/>
+								<field name="float_val" attrs="{'readonly' : ['|',('value_type','not in',('float'))]}"/>
+								<field name="text_val" attrs="{'readonly' : ['|',('value_type','not in',('text'))]}"/>
+								<field name="date_val" attrs="{'readonly' : ['|',('value_type','not in',('date'))]}"/>
+								<field name="datetime_val" attrs="{'readonly' : ['|',('value_type','not in',('datetime'))]}"/>
+								<field name="selection_id" attrs="{'readonly' : ['|',('value_type','not in',('selection'))]}"/>
+								<field name="values_ids"/>
+								<field name="value_type" invisible='1'/>
+								<field name="is_modified" invisible='0' default='False'/> -->
+						
+							</tree>
+								</field>
+							</group>
+						</group>
+							
+						
+							
+						
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</odoo>

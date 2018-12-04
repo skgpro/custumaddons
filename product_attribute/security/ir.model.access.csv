@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_custom_attribute_user,product.custom.attribute,product_attribute.model_product_custom_attribute,base.group_user,1,1,1,1
+access_values_line_user,values.line,product_attribute.model_values_line,base.group_user,1,1,1,1
+access_product_attribute_lines_user,product.attribute.lines,product_attribute.model_product_attribute_lines,,1,1,1,1
